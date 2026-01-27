@@ -1,0 +1,22 @@
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+exclude = [
+  ".git",
+  ".venv",
+  "venv",
+  "__pycache__",
+
+  "GPS test/",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I"]
+ignore = [
+  "E501",  # длинные строки (в тестах и API-ответах нормально)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/conftest.py" = ["F401", "F403"]
+"tests/**" = ["D", "S101"]
