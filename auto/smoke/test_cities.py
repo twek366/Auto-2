@@ -2,7 +2,7 @@ import allure
 import pytest
 from faker import Faker
 
-from WS.helpers.cities import get_dto
+from helpers.cities import get_dto
 
 fake = Faker("ru_RU")
 name = f"Test {fake.city()}"
