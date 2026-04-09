@@ -1,13 +1,15 @@
-from helpers.cities import generate_unique_city_name
+import uuid
+
+from faker import Faker
+
+fake = Faker("ru_RU")
 
 
-def generate_update_payload(new_name=None):
+def generate_city_payload(**overrides) -> dict:
 
-    if not new_name:
-        new_name = generate_unique_city_name()
-    return {"name": new_name}, new_name
+    defaults = {"name": f"smoke-{uuid.uuid4().hex[:8]}{fake.city()}"}
+    return {**defaults, **overrides}
 
-def update_city(api, city_id, new_name=None):
-    payload, name = generate_update_payload(new_name)
-    resp = api.update(city_id, payload)
-    return resp, name
+
+def generate_update_city_payload(**overrides) -> dict:
+    return {"name": f"upd-{uuid.uuid4().hex[:8]}{fake.city()}", **overrides}
